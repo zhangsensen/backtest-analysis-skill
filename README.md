@@ -6,6 +6,9 @@ and A/B comparison packs.
 This repository contains a portable `SKILL.md`-compatible skill for agents such as
 Codex or other skill-aware coding assistants.
 
+It also includes a small input profiler that recognizes common backtest artifact
+shapes before analysis starts.
+
 ## What It Does
 
 The skill turns concrete backtest artifacts into a disciplined decision memo.
@@ -49,6 +52,10 @@ backtest-analysis/
     data_shapes.md
   scripts/
     profile_input.py
+examples/
+  summary_ledger.csv
+  trade_ledger.csv
+  daily_pnl.csv
 ```
 
 ## Install
@@ -92,6 +99,14 @@ Profile a file first:
 python backtest-analysis/scripts/profile_input.py --input path/to/results.parquet
 ```
 
+Try the bundled examples:
+
+```bash
+python backtest-analysis/scripts/profile_input.py --input examples/summary_ledger.csv
+python backtest-analysis/scripts/profile_input.py --input examples/trade_ledger.csv
+python backtest-analysis/scripts/profile_input.py --input examples/daily_pnl.csv
+```
+
 Then ask your agent to use the skill on that artifact.
 
 Example:
@@ -106,6 +121,21 @@ Example:
 - A/B result packs
 - scorecard exports
 
+## Validation
+
+The repository ships with a GitHub Actions workflow that:
+
+- profiles the example datasets
+- checks the skill frontmatter
+
+You can also run the same checks locally:
+
+```bash
+python backtest-analysis/scripts/profile_input.py --input examples/summary_ledger.csv
+python backtest-analysis/scripts/profile_input.py --input examples/trade_ledger.csv
+python backtest-analysis/scripts/profile_input.py --input examples/daily_pnl.csv
+```
+
 ## Not For
 
 - open-ended root-cause diagnosis with no concrete dataset
@@ -116,4 +146,3 @@ Example:
 ## License
 
 MIT
-

@@ -1,0 +1,4 @@
+symbol,factor,trade_side,l4_sharpe,l4_cost_to_gross,l4_n_trades,l4_net_pnl,l4_max_drawdown,l3_holdout_sharpe,l2_oos_sharpe,l3_sharpe_decay,avg_pnl,win_rate,profit_factor
+AAPL,RSI_14,long,1.42,0.12,64,980.0,0.055,1.86,1.71,-0.0877,15.31,0.61,1.48
+MSFT,VWAP_DEV_24,long,1.16,0.18,41,525.0,0.072,1.22,1.33,0.0827,12.80,0.57,1.22
+NVDA,MAX_RETURN_20D,short,0.88,0.27,22,140.0,0.141,0.91,1.05,0.1333,6.36,0.50,1.04

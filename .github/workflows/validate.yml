@@ -1,0 +1,46 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate skill structure
+        run: |
+          python backtest-analysis/scripts/profile_input.py --input examples/summary_ledger.csv >/tmp/summary.json
+          python backtest-analysis/scripts/profile_input.py --input examples/trade_ledger.csv >/tmp/trade.json
+          python backtest-analysis/scripts/profile_input.py --input examples/daily_pnl.csv >/tmp/daily.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for p in ['/tmp/summary.json', '/tmp/trade.json', '/tmp/daily.json']:
+              payload = json.loads(Path(p).read_text())
+              assert 'inputs' in payload and payload['inputs'], p
+          print('example profiling ok')
+          PY
+
+      - name: Validate SKILL.md
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('backtest-analysis/SKILL.md').read_text()
+          assert p.startswith('---\nname: backtest-analysis\n'), 'frontmatter missing'
+          assert 'description:' in p, 'description missing'
+          print('skill frontmatter ok')
+          PY
