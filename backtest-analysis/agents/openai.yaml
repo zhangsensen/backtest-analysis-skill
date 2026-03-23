@@ -1,0 +1,4 @@
+interface:
+  display_name: "Backtest Analysis"
+  short_description: "Analyze backtest ledgers and trade data"
+  default_prompt: "Use $backtest-analysis to analyze this ledger or trade dataset and return a structured promote / watch / reject verdict."
