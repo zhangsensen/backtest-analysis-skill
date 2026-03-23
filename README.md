@@ -3,6 +3,8 @@
 [![validate](https://github.com/zhangsensen/backtest-analysis-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/zhangsensen/backtest-analysis-skill/actions/workflows/validate.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
+Turn backtest artifacts into disciplined promote, watch, or reject decisions.
+
 Structured analysis for backtest ledgers, trade logs, daily PnL series, scorecards,
 and A/B comparison packs.
 
@@ -99,6 +101,15 @@ examples/
   daily_pnl.csv
 ```
 
+## Agent Compatibility
+
+This skill is designed for agents that support `SKILL.md`-style skills.
+
+Tested structure:
+
+- Codex-style agents
+- Claude Code style skills
+
 ## Install
 
 ### Repo-local install for Codex-style agents
@@ -117,6 +128,24 @@ Copy the skill directory into your global skills location:
 ```bash
 mkdir -p ~/.codex/skills
 cp -R backtest-analysis ~/.codex/skills/
+```
+
+### Repo-local install for Claude Code
+
+Copy the skill into your Claude project skills directory:
+
+```bash
+mkdir -p .claude/skills
+cp -R backtest-analysis .claude/skills/
+```
+
+### User-global install for Claude Code
+
+Copy the skill into your user-level Claude skills directory:
+
+```bash
+mkdir -p ~/.claude/skills
+cp -R backtest-analysis ~/.claude/skills/
 ```
 
 ## Dependencies
@@ -203,6 +232,20 @@ python backtest-analysis/scripts/profile_input.py --input examples/summary_ledge
 python backtest-analysis/scripts/profile_input.py --input examples/trade_ledger.csv
 python backtest-analysis/scripts/profile_input.py --input examples/daily_pnl.csv
 ```
+
+## Release Notes
+
+### v0.1.0
+
+First public release.
+
+Included in `v0.1.0`:
+
+- portable `SKILL.md`-compatible `backtest-analysis` skill
+- input profiler for ledgers, trade logs, and daily PnL artifacts
+- example datasets for quick local testing
+- GitHub Actions validation workflow
+- MIT-licensed repository ready for Codex and Claude-style skill installs
 
 ## Not For
 
